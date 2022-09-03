@@ -22,11 +22,11 @@ const userLogScheme = joi.object(
 
 const businessScheme = joi.object(
     {
-        Name: joi.string().required().min(5).max(255),
-        Description: joi.string().required().min(15).max(255),
-        Address: joi.string().required().min(20).max(255),
-        Phone: joi.string().required().min(9).max(20),
-        Image: joi.string().required().min(20).max(500)
+        name: joi.string().required().min(5).max(255),
+        description: joi.string().required().min(15).max(255),
+        address: joi.string().required().min(20).max(255),
+        phone: joi.string().required().min(9).max(20),
+        image: joi.string().required().min(20).max(500)
     }
 );
 

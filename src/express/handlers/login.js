@@ -12,13 +12,13 @@ async function login (req, res){
     const doesExist = await operations.validateUserInDB(email, password);
 
     if(!doesExist) return res.status(500).json('no match found; please check your input');
-    if(doesExist == null) return res.status(500).json('Unexpested error occured. Please try again later');
+    if(doesExist == null) return res.status(500).json('Unexpested error occurred. Please try again later');
 
     const token = jwt.sign(
         {
             userId:doesExist._id,
             isBusinessAccount:doesExist.biz
-        }, 'toKey'); //  יצירת טוקן ייחודי המשוייך לנתון נוסף - איידי משתמש - ומוגדר תחת התגית מייקי
+        }, 'toKey');
 
     return res.json(token);
 

@@ -2,14 +2,14 @@ const operations = require('../../mongoose/operations');
 
 async function businessByIDs(req, res) {
 
-    const userId = req.userId;
-    const businessId = req.query.businessId;
+    const userId = req.userID;
+    const businessId = req.query.id;
 
-    if(!cardId) return res.status(400).json('לא סופק מזהה עסק');
+    if(!businessId) return res.status(400).json('Please insert valid business ID');
 
     const business = await operations.getBusinessFromDB(userId, businessId);
     if(business == undefined) res.status(500).json('No match found');
-    if(business == null) res.status(500).json('Unexpected error accured. Please try again');
+    if(business == null) res.status(500).json('Unexpected error occurred. Please try again later');
     res.json(business);
 
 }

@@ -92,7 +92,13 @@ async function updateBusinessInDB(userId, businessId, updatedBusinessObject) {
 
     try {
         const business = await models.businessModel.findOne({_id:businessId, userId:userId});
-        if (business) return await models.businessModel.findByIdAndUpdate(businessId, updatedBusinessObject);
+        if (business) {
+            await models.businessModel.findByIdAndUpdate(businessId, updatedBusinessObject);
+            const newBusiness = await models.businessModel.findById(businessId);
+            return newBusiness;
+        }
+        const security = await models.businessModel.findById(businessId);
+        if (security) return 1;
         return undefined;
     } catch {
         return null;
@@ -110,6 +116,8 @@ async function deleteBusinessFromDB(userId, businessId) {
             await models.businessModel.findByIdAndDelete(businessId);
             return business;
         }
+        const security = await models.businessModel.findById(businessId);
+        if (security) return 1;
         return undefined;
     } catch {
         return null;
